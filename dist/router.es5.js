@@ -1533,6 +1533,7 @@ var CanonicalRecognizer = function CanonicalRecognizer(name) {
       }
       if (mapping.otherwiseRedirectTo) {
         this.rewrites[OTHERWISE_REDIRECT_TO_REWRITE_KEY] = mapping.otherwiseRedirectTo;
+        return;
       }
       if (mapping.component) {
         if (mapping.components) {
@@ -1574,8 +1575,8 @@ var CanonicalRecognizer = function CanonicalRecognizer(name) {
       if (context) {
         context[0].handler.rewroteUrl = canonicalUrl;
       } else {
-        if (this.rewrites['OTHERWISE_REDIRECT_TO_REWRITE_KEY']) {
-          return this.recognize(this.rewrites['OTHERWISE_REDIRECT_TO_REWRITE_KEY'].directTo);
+        if (this.rewrites[OTHERWISE_REDIRECT_TO_REWRITE_KEY]) {
+          return this.recognize(this.rewrites[OTHERWISE_REDIRECT_TO_REWRITE_KEY]);
         }
       }
       return context;
