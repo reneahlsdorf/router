@@ -1,15 +1,15 @@
 {
-  "name": "angular-new-router",
-  "version": "0.5.3",
-  "description": "A new router for both Angular 1 and Angular 2",
-  "homepage": "https://github.com/angular/router",
+  "name": "reneahlsdorf-angular-new-router-extended",
+  "version": "1.0.0",
+  "description": "A new router for both Angular 1 and Angular 2. Extended version",
+  "homepage": "https://github.com/reneahlsdorf/router",
   "main": "dist/router.es5.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/angular/router.git"
+    "url": "git://github.com/reneahlsdorf/router.git"
   },
   "bugs": {
-    "url": "https://github.com/angular/router/issues"
+    "url": "https://github.com/reneahlsdorf/router/issues"
   },
   "dependencies": {
     "requirejs": "^2.1.15",

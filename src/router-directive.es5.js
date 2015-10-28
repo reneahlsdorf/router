@@ -85,7 +85,9 @@ function routerFactory($$rootRouter, $rootScope, $location, $$grammar, $controll
   $rootScope.$watch(function () {
     return $location.path();
   }, function (newUrl) {
-    $$rootRouter.navigate(newUrl);
+    var defaultP = $rootScope.$broadcast('$routerNavigationStart').defaultPrevented;
+      if (!defaultP)
+        $$rootRouter.navigate(newUrl);
   });
 
   var nav = $$rootRouter.navigate;
