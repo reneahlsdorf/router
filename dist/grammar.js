@@ -7,6 +7,7 @@ define(["assert", 'route-recognizer'], function($__0,$__2) {
   var assert = $__0.assert;
   var RouteRecognizer = $__2.default;
   var CHILD_ROUTE_SUFFIX = '/*childRoute';
+  var OTHERWISE_REDIRECT_TO_REWRITE_KEY = 'otherwiseRedirectTo';
   var Grammar = function Grammar() {
     this.rules = {};
   };
@@ -124,6 +125,9 @@ define(["assert", 'route-recognizer'], function($__0,$__2) {
         this.rewrites[mapping.path] = mapping.redirectTo;
         return;
       }
+      if (mapping.otherwiseRedirectTo) {
+        this.rewrites[OTHERWISE_REDIRECT_TO_REWRITE_KEY] = otherwiseRedirectTo;
+      }
       if (mapping.component) {
         if (mapping.components) {
           throw new Error('A route config should have either a "component" or "components" property, but not both.');
@@ -163,6 +167,10 @@ define(["assert", 'route-recognizer'], function($__0,$__2) {
       var context = this.recognizer.recognize(canonicalUrl);
       if (context) {
         context[0].handler.rewroteUrl = canonicalUrl;
+      } else {
+        if (this.rewrites['OTHERWISE_REDIRECT_TO_REWRITE_KEY']) {
+          return this.recognize(this.rewrites['OTHERWISE_REDIRECT_TO_REWRITE_KEY'].directTo);
+        }
       }
       return context;
     },

@@ -1412,6 +1412,7 @@ var RouteRecognizer = (function() {
     return RouteRecognizer;
   }());
 var CHILD_ROUTE_SUFFIX = '/*childRoute';
+var OTHERWISE_REDIRECT_TO_REWRITE_KEY = 'otherwiseRedirectTo';
 var Grammar = function Grammar() {
     this.rules = {};
   };
@@ -1530,6 +1531,9 @@ var CanonicalRecognizer = function CanonicalRecognizer(name) {
         this.rewrites[mapping.path] = mapping.redirectTo;
         return;
       }
+      if (mapping.otherwiseRedirectTo) {
+        this.rewrites[OTHERWISE_REDIRECT_TO_REWRITE_KEY] = otherwiseRedirectTo;
+      }
       if (mapping.component) {
         if (mapping.components) {
           throw new Error('A route config should have either a "component" or "components" property, but not both.');
@@ -1569,6 +1573,10 @@ var CanonicalRecognizer = function CanonicalRecognizer(name) {
       var context = this.recognizer.recognize(canonicalUrl);
       if (context) {
         context[0].handler.rewroteUrl = canonicalUrl;
+      } else {
+        if (this.rewrites['OTHERWISE_REDIRECT_TO_REWRITE_KEY']) {
+          return this.recognize(this.rewrites['OTHERWISE_REDIRECT_TO_REWRITE_KEY'].directTo);
+        }
       }
       return context;
     },
