@@ -143,7 +143,7 @@ class CanonicalRecognizer {
     }
 
     if(mapping.otherwiseRedirectTo){
-      this.rewrites[OTHERWISE_REDIRECT_TO_REWRITE_KEY] = otherwiseRedirectTo;
+      this.rewrites[OTHERWISE_REDIRECT_TO_REWRITE_KEY] = mapping.otherwiseRedirectTo;
     }
 
     // normalize "component" and "components" in config

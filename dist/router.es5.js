@@ -1532,7 +1532,7 @@ var CanonicalRecognizer = function CanonicalRecognizer(name) {
         return;
       }
       if (mapping.otherwiseRedirectTo) {
-        this.rewrites[OTHERWISE_REDIRECT_TO_REWRITE_KEY] = otherwiseRedirectTo;
+        this.rewrites[OTHERWISE_REDIRECT_TO_REWRITE_KEY] = mapping.otherwiseRedirectTo;
       }
       if (mapping.component) {
         if (mapping.components) {
