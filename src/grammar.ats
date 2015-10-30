@@ -182,12 +182,12 @@ class CanonicalRecognizer {
   recognize(url) {
     var canonicalUrl = this.getCanonicalUrl(url);
     var context = this.recognizer.recognize(canonicalUrl);
-    if (context && !context[0].isDynamic) {
+    if (context /*&& !context[0].isDynamic*/) {
       context[0].handler.rewroteUrl = canonicalUrl;
-    } else{
-          if(this.rewrites[OTHERWISE_REDIRECT_TO_REWRITE_KEY]){
-           return this.recognize(this.rewrites[OTHERWISE_REDIRECT_TO_REWRITE_KEY]);
-          }
+    //} else{
+      //    if(this.rewrites[OTHERWISE_REDIRECT_TO_REWRITE_KEY]){
+        //   return this.recognize(this.rewrites[OTHERWISE_REDIRECT_TO_REWRITE_KEY]);
+    //      }
     }
     return context;
   }

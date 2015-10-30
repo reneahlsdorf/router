@@ -166,12 +166,8 @@ define(["assert", 'route-recognizer'], function($__0,$__2) {
     recognize: function(url) {
       var canonicalUrl = this.getCanonicalUrl(url);
       var context = this.recognizer.recognize(canonicalUrl);
-      if (context && !context[0].isDynamic) {
+      if (context) {
         context[0].handler.rewroteUrl = canonicalUrl;
-      } else {
-        if (this.rewrites[OTHERWISE_REDIRECT_TO_REWRITE_KEY]) {
-          return this.recognize(this.rewrites[OTHERWISE_REDIRECT_TO_REWRITE_KEY]);
-        }
       }
       return context;
     },
