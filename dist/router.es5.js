@@ -1572,7 +1572,11 @@ var CanonicalRecognizer = function CanonicalRecognizer(name) {
     recognize: function(url) {
       var canonicalUrl = this.getCanonicalUrl(url);
       var context = this.recognizer.recognize(canonicalUrl);
-      if (context) {
+      if (context && context[0].isDynamic && context[0].handler.path.indexOf(CHILD_ROUTE_SUFFIX) > -1) {
+        if (this.rewrites[OTHERWISE_REDIRECT_TO_REWRITE_KEY]) {
+          return this.recognize(this.rewrites[OTHERWISE_REDIRECT_TO_REWRITE_KEY]);
+        }
+      } else {
         context[0].handler.rewroteUrl = canonicalUrl;
       }
       return context;
